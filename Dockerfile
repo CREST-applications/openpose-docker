@@ -1,4 +1,4 @@
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04 AS builder
+FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ENV LANG=en_US.UTF-8
@@ -36,14 +36,6 @@ RUN cmake \
     .. && \
     make -j`nproc`
 
-
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
-
-ENV OPENPOSE_DIR=/usr/lib/openpose
-
-RUN apt-get update && apt-get install -y \
-    wget
-
 # download models
 WORKDIR ${OPENPOSE_DIR}/models/pose/body_25
 RUN wget -c https://www.dropbox.com/s/3x0xambj2rkyrap/pose_iter_584000.caffemodel
@@ -53,11 +45,9 @@ WORKDIR ${OPENPOSE_DIR}/models/hand
 RUN wget -c https://www.dropbox.com/s/gqgsme6sgoo0zxf/pose_iter_102000.caffemodel
 
 # install python dependencies
-COPY --from=builder ${OPENPOSE_DIR}/build/python ${OPENPOSE_DIR}
-COPY --from=builder ${OPENPOSE_DIR}/models ${OPENPOSE_DIR}/models
 
 ENV OPENPOSE_MODEL_PATH=${OPENPOSE_DIR}/models
-ENV PYTHONPATH=${OPENPOSE_DIR}/openpose
+ENV PYTHONPATH=${OPENPOSE_DIR}/build/python
 
 # uninstall old python
 # RUN apt-get remove -y python3.10 python3-pip
