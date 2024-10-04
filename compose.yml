@@ -15,6 +15,20 @@ services:
         reservations:
           devices:
             - driver: nvidia
+              count: 1
               capabilities:
               - gpu
-    command: /bin/bash
+    working_dir: /usr/lib/openpose/build/examples/tutorial_api_python
+    # command: /bin/bash
+    command: python3 01_body_from_image.py
+# services:
+#   nvidia-test:
+#     image: nvidia/cuda:11.5.2-base-ubuntu20.04
+#     command: nvidia-smi
+#     deploy:
+#       resources:
+#         reservations:
+#           devices:
+#             - driver: nvidia
+#               count: 1
+#               capabilities: [gpu]

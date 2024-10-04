@@ -1,5 +1,6 @@
-FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
+# FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
 # FROM nvidia/cuda:12.6.1-runtime-ubuntu24.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ENV LANG=en_US.UTF-8
