@@ -1,4 +1,5 @@
 FROM nvidia/cuda:11.7.1-cudnn8-devel-ubuntu22.04
+# FROM nvidia/cuda:12.6.1-runtime-ubuntu24.04
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 ENV LANG=en_US.UTF-8
@@ -39,10 +40,10 @@ RUN cmake \
 # download models
 WORKDIR ${OPENPOSE_DIR}/models/pose/body_25
 RUN wget -c https://www.dropbox.com/s/3x0xambj2rkyrap/pose_iter_584000.caffemodel
-WORKDIR ${OPENPOSE_DIR}/models/face
-RUN wget -c https://www.dropbox.com/s/d08srojpvwnk252/pose_iter_116000.caffemodel
-WORKDIR ${OPENPOSE_DIR}/models/hand
-RUN wget -c https://www.dropbox.com/s/gqgsme6sgoo0zxf/pose_iter_102000.caffemodel
+# WORKDIR ${OPENPOSE_DIR}/models/face
+# RUN wget -c https://www.dropbox.com/s/d08srojpvwnk252/pose_iter_116000.caffemodel
+# WORKDIR ${OPENPOSE_DIR}/models/hand
+# RUN wget -c https://www.dropbox.com/s/gqgsme6sgoo0zxf/pose_iter_102000.caffemodel
 
 # install python dependencies
 

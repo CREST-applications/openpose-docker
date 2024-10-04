@@ -1,6 +1,7 @@
 services:
   builder:
     build: .
+    image: jme06/openpose:0.2.0
     tty: true
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
